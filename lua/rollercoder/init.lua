@@ -80,7 +80,7 @@ require("lazy").setup({
             end,
         },
     },
-    { "tpope/vim-fugitive" },
+    -- { "tpope/vim-fugitive" }, replaced with lazy git
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
@@ -166,7 +166,7 @@ require("lazy").setup({
         },
     },
     { 'ryanoasis/vim-devicons' },
-    { 'kyazdani42/nvim-web-devicons' },
+    -- { 'kyazdani42/nvim-web-devicons' },
     {
         -- Set lualine as statusline
         'nvim-lualine/lualine.nvim',
@@ -178,6 +178,14 @@ require("lazy").setup({
                 component_separators = '|',
                 section_separators = '',
             },
+            sections = {
+                   lualine_c = {
+                           {
+                                   'filename',
+                                   path = 2,
+                               }
+                           }
+                        }
         },
     },
     { 'mg979/vim-visual-multi', branch = 'master' }
