@@ -83,32 +83,49 @@ require("lazy").setup({
     -- { "tpope/vim-fugitive" }, replaced with lazy git
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+    -- { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' }, MERGE WITH KICKSTART
+    -- {
+    --     'neovim/nvim-lspconfig',
+    --     -- opts = {
+    --     --     -- make sure mason installs the server
+    --     --     servers = {
+    --     --         -- html
+    --     --         html = {
+    --     --             filetypes = { "html", "javascript", "typescript"},
+    --     --         },
+    --     --         -- Emmet
+    --     --         emmet_ls = {
+    --     --             init_options = {
+    --     --                 html = {
+    --     --                     options = {
+    --     --                         -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+    --     --                         ["bem.enabled"] = true,
+    --     --                     },
+    --     --                 },
+    --     --             },
+    --     --         },
+    --     --         -- CSS
+    --     --         cssls = {},
+    --     --     },
+    --     -- },
+    -- },
     {
-        'neovim/nvim-lspconfig',
-        -- opts = {
-        --     -- make sure mason installs the server
-        --     servers = {
-        --         -- html
-        --         html = {
-        --             filetypes = { "html", "javascript", "typescript"},
-        --         },
-        --         -- Emmet
-        --         emmet_ls = {
-        --             init_options = {
-        --                 html = {
-        --                     options = {
-        --                         -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-        --                         ["bem.enabled"] = true,
-        --                     },
-        --                 },
-        --             },
-        --         },
-        --         -- CSS
-        --         cssls = {},
-        --     },
-        -- },
+    -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+
+      -- Additional lua configuration, makes nvim stuff amazing!
+      'folke/neodev.nvim',
     },
+  },
+
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
     { "rafamadriz/friendly-snippets" },
@@ -189,6 +206,7 @@ require("lazy").setup({
         },
     },
     { 'mg979/vim-visual-multi', branch = 'master' }
+
 })
 --
 -- -- [[ Highlight on yank ]]
