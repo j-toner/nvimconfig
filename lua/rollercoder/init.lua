@@ -15,6 +15,20 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
+  "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    },
+        config = function()
+            require("chatgpt").setup({
+                api_key_cmd = "pass show chat-gpt",
+            })
+        end,
+},
+    {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' }
