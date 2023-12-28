@@ -12,28 +12,58 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
-
 require("lazy").setup({
     {
-  "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    },
+        "jackMort/ChatGPT.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        },
         config = function()
             require("chatgpt").setup({
-                api_key_cmd = "pass show chat-gpt",
+                api_key_cmd = "pass show chat-gpt-key",
             })
         end,
-},
+    },
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    -- { 'rose-pine/neovim', name = 'rose-pine' },
+    {
+        'nvim-telescope/telescope-ui-select.nvim',
+        config = function()
+            -- This is your opts table
+            require("telescope").setup({
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown {
+                            -- even more opts
+                        }
+
+                        -- pseudo code / specification for writing custom displays, like the one
+                        -- for "codeactions"
+                        -- specific_opts = {
+                        --   [kind] = {
+                        --     make_indexed = function(items) -> indexed_items, width,
+                        --     make_displayer = function(widths) -> displayer
+                        --     make_display = function(displayer) -> function(e)
+                        --     make_ordinal = function(e) -> string
+                        --   },
+                        --   -- for example to disable the custom builtin "codeactions" display
+                        --      do the following
+                        --   codeactions = false,
+                        -- }
+                    }
+                }
+            })
+            -- To get ui-select loaded and working with telescope, you need to call
+            -- load_extension, somewhere after setup function:
+            require("telescope").load_extension("ui-select")
+        end
+    },
     {
         "folke/tokyonight.nvim",
         lazy = false,
@@ -97,48 +127,41 @@ require("lazy").setup({
     -- { "tpope/vim-fugitive" }, replaced with lazy git
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-    -- { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' }, MERGE WITH KICKSTART
-    -- {
-    --     'neovim/nvim-lspconfig',
-    --     -- opts = {
-    --     --     -- make sure mason installs the server
-    --     --     servers = {
-    --     --         -- html
-    --     --         html = {
-    --     --             filetypes = { "html", "javascript", "typescript"},
-    --     --         },
-    --     --         -- Emmet
-    --     --         emmet_ls = {
-    --     --             init_options = {
-    --     --                 html = {
-    --     --                     options = {
-    --     --                         -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-    --     --                         ["bem.enabled"] = true,
-    --     --                     },
-    --     --                 },
-    --     --             },
-    --     --         },
-    --     --         -- CSS
-    --     --         cssls = {},
-    --     --     },
-    --     -- },
-    -- },
     {
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+        -- LSP Configuration & Plugins
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
 
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+            -- Additional lua configuration, makes nvim stuff amazing!
+            'folke/neodev.nvim',
+        },
+        config = function()
+            local lspconfig = require 'lspconfig'
+            local configs = require 'lspconfig/configs'
+
+            if not configs.golangcilsp then
+                configs.golangcilsp = {
+                    default_config = {
+                        cmd = { 'golangci-lint-langserver' },
+                        root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+                        init_options = {
+                            command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" },
+                        }
+                    },
+                }
+            end
+            lspconfig.golangci_lint_ls.setup {
+                filetypes = { 'go', 'gomod' }
+            }
+        end
     },
-  },
 
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
@@ -170,6 +193,7 @@ require("lazy").setup({
         config = function()
             require('mini.pairs').setup()
         end,
+        ---@diagnostic disable-next-line: assign-type-mismatch
         version = false
     }, --auto pairs chars {}[]()""''
     {
@@ -181,7 +205,7 @@ require("lazy").setup({
         opts = {},
     },
     -- "gc" to comment visual regions/lines
-    { 'numToStr/Comment.nvim',       opts = {} },
+    { 'numToStr/Comment.nvim', opts = {} },
     -- visually select then press s<char> or press sa{motion}{char}
     {
         "ur4ltz/surround.nvim",
@@ -210,26 +234,51 @@ require("lazy").setup({
                 section_separators = '',
             },
             sections = {
-                   lualine_c = {
-                           {
-                                   'filename',
-                                   path = 2,
-                               }
-                           }
-                        }
+                lualine_c = {
+                    {
+                        'filename',
+                        path = 2,
+                    }
+                }
+            }
         },
     },
-    { 'mg979/vim-visual-multi', branch = 'master' }
+    { 'mg979/vim-visual-multi', branch = 'master' },
+    {
+        'ggandor/leap.nvim',
+        config = function()
+            require('leap').add_default_mappings()
+        end
+    },
+    -- { "tpope/vim-vinegar" },
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require('oil').setup({
+
+                view_options = {
+                    -- Show files and directories that start with "."
+                    show_hidden = true,
+                    -- This function defines what is considered a "hidden" file
+                    is_hidden_file = function(name, bufnr)
+                        return vim.startswith(name, ".")
+                    end,
+                    -- This function defines what will never be shown, even when `show_hidden` is set
+                    is_always_hidden = function(name, bufnr)
+                        return false
+                    end,
+                    sort = {
+                        -- sort order can be "asc" or "desc"
+                        -- see :help oil-columns to see which columns are sortable
+                        { "type", "asc" },
+                        { "name", "asc" },
+                    },
+                },
+            })
+        end
+    }
 
 })
---
--- -- [[ Highlight on yank ]]
--- -- See `:help vim.highlight.on_yank()`
--- local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
--- vim.api.nvim_create_autocmd('TextYankPost', {
---   callback = function()
---     vim.highlight.on_yank()
---   end,
---   group = highlight_group,
---   pattern = '*',
--- })
