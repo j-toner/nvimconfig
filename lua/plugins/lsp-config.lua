@@ -10,7 +10,6 @@ local on_attach = function(_, bufnr)
 	end
 
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
 	nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 	nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
@@ -19,7 +18,6 @@ local on_attach = function(_, bufnr)
 	nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
 	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
@@ -27,7 +25,13 @@ local on_attach = function(_, bufnr)
 	nmap("<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "[W]orkspace [L]ist Folders")
+
+	vim.keymap.set("n", "<C-f>", function ()
+	   vim.lsp.buf.format { async = true }
+	end )
+	-- vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
 end
+
 local servers = {
 	tsserver = { filetypes = { "javascript", "typscript" } },
 	html = { filetypes = { "html", "twig", "hbs" } },
@@ -39,6 +43,7 @@ local servers = {
 		},
 	},
 }
+
 return {
 	{
 		"williamboman/mason.nvim",
@@ -104,7 +109,6 @@ return {
 			lspconfig.golangci_lint_ls.setup({
 				filetypes = { "go", "gomod" },
 			})
-			vim.keymap.set("n", "<C-f>", "<CMD> lua vim.lsp.buf.format()<CR>")
 		end,
 	},
 }
