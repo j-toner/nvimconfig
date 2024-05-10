@@ -29,7 +29,6 @@ return {
 			modules = {}, -- I added this to make the warning go away
 			-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 			auto_install = true,
-
 			highlight = { enable = true },
 			indent = { enable = true },
 			incremental_selection = {

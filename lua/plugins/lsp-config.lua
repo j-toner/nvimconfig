@@ -26,6 +26,58 @@ local on_attach = function(_, bufnr)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, "[W]orkspace [L]ist Folders")
 
+
+    -- nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    -- See `:help telescope.builtin`
+    vim.keymap.set(
+        "n",
+        "<leader>?",
+        require("telescope.builtin").oldfiles,
+        { desc = "[?] Find recently opened files" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader><space>",
+        require("telescope.builtin").buffers,
+        { desc = "[ ] Find existing buffers" }
+    )
+    vim.keymap.set("n", "<leader>/", function()
+        -- You can pass additional configuration to telescope to change theme, layout, etc.
+        require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+            winblend = 10,
+            previewer = false,
+        }))
+    end, { desc = "[/] Fuzzily search in current buffer" })
+
+    vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
+    vim.keymap.set(
+        "n",
+        "<leader>sw",
+        require("telescope.builtin").grep_string,
+        { desc = "[S]earch current [W]ord" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>sd",
+        require("telescope.builtin").diagnostics,
+        { desc = "[S]earch [D]iagnostics" }
+    )
+
+    local builtin = require("telescope.builtin")
+    vim.keymap.set("n", "<leader>sr", require("telescope.builtin").resume, { desc = "[S]earch [R]esume" })
+    vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files" })
+    vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep" })
+    vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help" })
+    vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
+    vim.keymap.set(
+        "n",
+        "<leader><space>",
+        require("telescope.builtin").buffers,
+        { desc = "[ ] Find existing buffers" }
+    )
+    -- require('telescope.actions').delete_buffer,
+
     vim.keymap.set("n", "<C-f>", function()
         vim.lsp.buf.format({ async = true })
     end)
@@ -33,7 +85,8 @@ local on_attach = function(_, bufnr)
 end
 
 local servers = {
-    tsserver = { filetypes = { "javascript", "typscript" } },
+    tsserver = { filetypes = { "javascript", "typescript", "svelte" } },
+    svelte = { filetypes = { "svelte" } },
     html = { filetypes = { "html", "twig", "hbs" } },
 
     lua_ls = {
@@ -51,7 +104,6 @@ return {
             require("mason").setup()
         end,
     },
-
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
@@ -59,10 +111,10 @@ return {
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
             mason_lspconfig.setup({
-                ensure_installed = { "lua_ls", "tsserver" },
+                -- ensure_installed = { "lua_ls" },
+                -- ensure_installed = { "tsserver" },
             })
             mason_lspconfig.setup_handlers({
-
                 function(server_name)
                     require("lspconfig")[server_name].setup({
                         capabilities = capabilities,
@@ -76,7 +128,6 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-
         dependencies = {
             { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
             "folke/neodev.nvim",
@@ -84,31 +135,11 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({})
+            lspconfig.tsserver.setup({
+                cmd = {'typescript-language-server'},
+            })
             local configs = require("lspconfig/configs")
 
-            if not configs.golangcilsp then
-                configs.golangcilsp = {
-                    default_config = {
-                        cmd = { "golangci-lint-langserver" },
-                        root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
-                        init_options = {
-                            command = {
-                                "golangci-lint",
-                                "run",
-                                "--enable-all",
-                                "--disable",
-                                "lll",
-                                "--out-format",
-                                "json",
-                                "--issues-exit-code=1",
-                            },
-                        },
-                    },
-                }
-            end
-            lspconfig.golangci_lint_ls.setup({
-                filetypes = { "go", "gomod" },
-            })
         end,
     },
 }

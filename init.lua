@@ -16,6 +16,10 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
+--    cmd =  "typescript-language-server --stdio" ,
+  --  root_dir = "data/data/com.termux/files/home/.local/share/nvim/mason/bin/"
+
 vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
