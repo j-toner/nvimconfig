@@ -21,3 +21,5 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("remaps")
 require("lazy").setup("plugins")
+
+vim.cmd.colorscheme("carbonfox")

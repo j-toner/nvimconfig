@@ -15,6 +15,9 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set("n", "<leader>y", '"+y') --yank to clipboard
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>p", '"+p')
+vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>d", '"_d') --delete without saving deleted text to buffer
 vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "Q", "<nop>")

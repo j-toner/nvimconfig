@@ -40,6 +40,7 @@ return {
             end, { desc = "[/] Fuzzily search in current buffer" })
 
             vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
+            -- vim.keymap.set("n", "<C-d>", require("telescope.actions").delete_buffer, {desc = 'delete buffer'})
             vim.keymap.set(
                 "n",
                 "<leader>sw",
