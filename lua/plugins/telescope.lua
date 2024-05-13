@@ -1,17 +1,8 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
+        -- tag = "0.1.5",
         dependencies = { "nvim-lua/plenary.nvim" },
-        defaults = {
-            mappings = {
-                i = {
-                    ["<C-u>"] = false,
-                    ["<C-d>"] = require("telescope.actions").delete_buffer,
-                    -- ['<C-d'] = false,
-                },
-            },
-        },
         config = function()
             local builtin = require("telescope.builtin")
             -- Enable telescope fzf native, if installed
@@ -65,7 +56,6 @@ return {
                 require("telescope.builtin").buffers,
                 { desc = "[ ] Find existing buffers" }
             )
-            -- require('telescope.actions').delete_buffer,
         end,
     },
     {
@@ -96,8 +86,8 @@ return {
                     },
                 },
             })
-            -- To get ui-select loaded and working with telescope, you need to call
-            -- load_extension, somewhere after setup function:
+    --         -- To get ui-select loaded and working with telescope, you need to call
+    --         -- load_extension, somewhere after setup function:
             require("telescope").load_extension("ui-select")
         end,
     },
