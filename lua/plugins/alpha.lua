@@ -42,7 +42,7 @@ return {
 
 		dashboard.section.footer.val = footer()
 
-		dashboard.opts.opts.noautocmd = true
+		dashboard.opts.opts.noautocmd = false
 		alpha.setup(dashboard.opts)
 	end,
 }
