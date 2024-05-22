@@ -1,3 +1,4 @@
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 vim.opt.guicursor = "i:ver30-iCursor-blinkon1"
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
@@ -19,7 +20,6 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.scroll = 5
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
