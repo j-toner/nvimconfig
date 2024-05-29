@@ -5,10 +5,11 @@ vim.cmd([[nnoremap <Tab> <C-w>w]])
 -- vim.keymap.set("n", "<C-e>", "<esc>") -- changed from network rw to Oil
 -- vim.keymap.set("v", "<C-e>", "<esc>") -- changed from network rw to Oil
 vim.keymap.set("n", "<leader>pv", vim.cmd.Oil) -- changed from network rw to Oil
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") --move selected up
+-- vim.keymap.set("n", "<C-t>", vim.cmd.FloatermToggle) -- changed from network rw to Oil
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") --move selected u
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") --move selected down
-vim.keymap.set("n", "<C-d>", "<C-d>zz") --move down
-vim.keymap.set("n", "<C-u>", "<C-u>zz") --move up
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz") --move down
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz") --move up
 vim.keymap.set("n", "n", "nzzzv") -- center searched words
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", '"_dP')
@@ -23,6 +24,15 @@ vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-s>", ":w <CR>") --Save / write file
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+--Center Cursor
+vim.keymap.set('n', '<leader>cc', function() vim.opt.scrolloff = 999 - vim.o.scrolloff end)
+--tabnew
+vim.keymap.set('n', '<C-t>', function() vim.cmd.tabnew() end) -- NEW TAB
+vim.keymap.set('n', '<C-l>', function() vim.cmd.tabnext() end) -- NEXT TAB
+vim.keymap.set('n', '<C-h>', function() vim.cmd.tabprev() end) --PREV TAB
+-- vim.keymap.set('n', '<C-w>', function() vim.cmd.tabclose() end)
+vim.keymap.set("n", "<leader>no", ":cd /home/jt/Obsidian Vault <bar> :ene <CR>") --Save / write file
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

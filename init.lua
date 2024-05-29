@@ -2,6 +2,14 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+--neovide only
+
+if vim.g.neovide then
+    -- Put anything you want to happen only in Neovide here
+    vim.g.neovide_transparency = 0.8
+    vim.cmd "cd ~/progRock"   -- starts in ~/progRock
+end
+
 vim.opt.scroll = 5
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

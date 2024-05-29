@@ -43,6 +43,7 @@ return {
         end
 
        alpha.setup(dashboard.config)
+        -- dashboard.section.footer.val = footer()
         -- alpha.setup(dashboard.opts)
 
         -- dashboard.section.footer.val = require("alpha.fortune")()
