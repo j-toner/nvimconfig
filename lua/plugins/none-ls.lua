@@ -6,10 +6,10 @@ return {
 			sources = {
 				null_ls.builtins.formatting.stylua,
 				-- null_ls.builtins.formatting.prettier,
-				-- null_ls.builtins.formatting.prettierd,
+				null_ls.builtins.formatting.prettierd,
 				-- null_ls.builtins.formatting.rustywind,
 				-- -- null_ls.builtins.formatting.golangci_lint_langserver,
-				-- null_ls.builtins.formatting.svelte,
+				null_ls.builtins.formatting.svelte,
 				-- null_ls.builtins.completion.svelte,
 				-- null_ls.builtins.completion.tailwindcss,
 				null_ls.builtins.diagnostics.rust_analyzer,

@@ -11,7 +11,7 @@ return {
 						-- You can use the capture groups defined in textobjects.scm
 						["a="] = { query = "@assignment.outer", desc = "Select outer assignment" },
 						["i="] = { query = "@assignment.inner", desc = "Select inner assignment" },
-						["l="] = { query = "@assignment.lhs", desc = "Select left hand side of assignment" },
+						-- ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of assignment" }, this makes the cursor move forward
 						["r="] = { query = "@assignment.rhs", desc = "Select right hand side of assignment" },
 					},
 				},

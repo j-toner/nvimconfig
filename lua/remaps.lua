@@ -33,7 +33,9 @@ print(os.clock() * 1000)
 vim.keymap.set('n', '<C-t>', function() vim.cmd.tabnew() end) -- NEW TAB
 vim.keymap.set('n', '<C-l>', function() vim.cmd.tabnext() end) -- NEXT TAB
 vim.keymap.set('n', '<C-h>', function() vim.cmd.tabprev() end) --PREV TAB
-
+--terminal
+vim.keymap.set('n', '<leader>t', function() vim.cmd.terminal() end) -- Open Terminal 
+-- delete buffer
 vim.keymap.set("n", "<leader>db", ":bdelete <CR>") --delete buffer
 -- vim.keymap.set('n', '<C-w>', function()  vim.cmd.tabclose() end)
 -- vim.keymap.set("n", "<leader>no", string.format(':vsplit <bar> :new /home/jt/ObsidianVault/[os.clock() * 100000] <CR>')) --Save / write file

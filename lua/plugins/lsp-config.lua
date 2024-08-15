@@ -34,9 +34,9 @@ local on_attach = function(_, bufnr)
 end
 
 local servers = {
-	tsserver = { filetypes = { "javascript", "typscript" } },
+	tsserver = { filetypes = { "javascript", "typescript" } },
 	html = { filetypes = { "html", "twig", "hbs" } },
-
+    svelte = { filetypes = { "svelte" } },
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
@@ -60,7 +60,7 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 			mason_lspconfig.setup({
-				ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
+				ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "svelte" },
 			})
 			mason_lspconfig.setup_handlers({
 
