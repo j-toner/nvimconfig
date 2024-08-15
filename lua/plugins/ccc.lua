@@ -6,7 +6,7 @@ return {
         -- Example: enable highlighter
         highlighter = {
             auto_enable = true,
-            lsp = false,
+            lsp = true,
         },
     })
     end,
