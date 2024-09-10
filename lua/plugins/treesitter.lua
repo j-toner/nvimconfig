@@ -23,6 +23,7 @@ return {
 				"vimdoc",
 				"vim",
 				"bash",
+                "http",
 			},
 			sync_install = false, -- I added this
 			ignore_install = {}, -- I added this

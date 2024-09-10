@@ -46,7 +46,6 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
-                    { name = "cody" },
                 },
             })
             -- cmp.setup {
