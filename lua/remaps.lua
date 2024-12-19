@@ -6,7 +6,6 @@ vim.cmd([[nnoremap <Tab> <C-w>w]])
 -- vim.keymap.set("n", "<C-e>", "<esc>") -- changed from network rw to Oil
 -- vim.keymap.set("v", "<C-e>", "<esc>") -- changed from network rw to Oil
 vim.keymap.set("n", "<leader>pv", vim.cmd.Oil) -- changed from network rw to Oil
--- vim.keymap.set("n", "<C-t>", vim.cmd.FloatermToggle) -- changed from network rw to Oil
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") --move selected u
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") --move selected down
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz") --move down
@@ -34,7 +33,8 @@ vim.keymap.set('n', '<C-t>', function() vim.cmd.tabnew() end) -- NEW TAB
 vim.keymap.set('n', '<C-l>', function() vim.cmd.tabnext() end) -- NEXT TAB
 vim.keymap.set('n', '<C-h>', function() vim.cmd.tabprev() end) --PREV TAB
 --terminal
-vim.keymap.set('n', '<leader>t', function() vim.cmd.terminal() end) -- Open Terminal 
+-- vim.keymap.set('n', '<leader>t', function() vim.cmd.terminal() end) -- Open Terminal 
+vim.keymap.set("n", '<leader>t', vim.cmd.FloatermToggle) -- changed from network rw to Oil
 -- delete buffer
 vim.keymap.set("n", "<leader>db", ":bdelete <CR>") --delete buffer
 -- vim.keymap.set('n', '<C-w>', function()  vim.cmd.tabclose() end)

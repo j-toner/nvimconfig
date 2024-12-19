@@ -3,6 +3,11 @@ return {
 	lazy = true,
 	config = function()
 		require("nvim-treesitter.configs").setup({
+            ensure_installed = { "lua", "rust", "toml", "tsx", "javascript", "typescript" },
+            ignore_install = { "phpdoc" },
+            sync_install = false,
+            auto_install = true,
+            modules = {},
 			textobjects = {
 				select = {
 					enable = true,
