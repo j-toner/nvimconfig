@@ -6,11 +6,11 @@ return {
     },
     config = function()
         require("codeium").setup({
+            -- codeium_enabled = false, -- disabled by default
             -- Instead of using cmp source. Shows text on screen.
             enable_cmp_source = false,
             virtual_text = {
                 enabled = true,
-
                 -- These are the defaults
 
                 -- Set to true if you never want completions to be shown automatically.
@@ -39,11 +39,11 @@ return {
                     -- Accept the next line.
                     accept_line = false,
                     -- Clear the virtual text.
-                    clear = false,
+                    clear = "<C-/>",
                     -- Cycle to the next completion.
-                    next = "<M-]>",
+                    next = "<C-.>",
                     -- Cycle to the previous completion.
-                    prev = "<M-[>",
+                    prev = "<C-,>",
                 }
             }
         })

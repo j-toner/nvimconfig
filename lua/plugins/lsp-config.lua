@@ -44,7 +44,7 @@ return {
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
             mason_lspconfig.setup({
-                ensure_installed = { "lua_ls", "rust_analyzer", "svelte", "ts_ls" },
+                ensure_installed = { "lua_ls", "rust_analyzer", "svelte", "ts_ls", "pylsp" },
                 automatic_installation = true,
             })
         end,
@@ -53,22 +53,25 @@ return {
         "neovim/nvim-lspconfig",
 
         dependencies = {
-            "folke/lazydev.nvim",
-            ft = "lua", -- only load on lua files
-            opts = {
-                library = {
-                    -- See the configuration section for more details
-                    -- Load luvit types when the `vim.uv` word is found
-                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            { "j-hui/fidget.nvim", opts = {} },
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
                 },
-            },
+            }
         },
         config = function()
             local configs = require("lspconfig/configs")
             local lspconfig = require("lspconfig")
             -- local capabilities = require('blink.cmp').get_lsp_capabilities()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local servers = { 'svelte', 'html', 'lua_ls', 'ts_ls' }
+            local servers = { 'svelte', 'html', 'lua_ls', 'ts_ls', 'gopls', 'tailwindcss', 'pylsp' }
             for _, lsp in ipairs(servers) do
                 lspconfig[lsp].setup({
                     capabilities = capabilities,
