@@ -34,14 +34,31 @@ vim.opt.colorcolumn = "150"
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = "*",
 })
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
+-- diagnostic info
+-- vim.diagnostic.config({virtual_lines = {current_line = true}})
+
+vim.keymap.set('n', 'gK', function()
+    local new_config = not vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = 'Toggle diagnostic virtual_lines' })
+
+
+--vim.apm.nvim_create_autocmd('LspAttach', {
+--    callback = function (ev)
+--        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--        if client:supports_method("textDocument/completion") then
+--            vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = true})
+--        end
+--    end,
+--})

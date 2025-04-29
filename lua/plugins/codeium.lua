@@ -5,7 +5,8 @@ return {
         --'saghen/blink.cmp',
     },
     config = function()
-        require("codeium").setup({
+        local codeium = require("codeium")
+        codeium.setup({
             -- codeium_enabled = false, -- disabled by default
             -- Instead of using cmp source. Shows text on screen.
             enable_cmp_source = false,
@@ -14,7 +15,7 @@ return {
                 -- These are the defaults
 
                 -- Set to true if you never want completions to be shown automatically.
-                manual = false,
+                manual = true,
                 -- A mapping of filetype to true or false, to enable virtual text.
                 filetypes = {},
                 -- Whether to enable virtual text of not for filetypes not specifically listed above.
@@ -47,5 +48,7 @@ return {
                 }
             }
         })
+        vim.keymap.set('i', '<C-i>', function() require('codeium.virtual_text').complete() end, { expr = true, silent = true })
+
     end
 }

@@ -30,8 +30,36 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "<C-f>", function()
         vim.lsp.buf.format({ async = true })
     end)
+
+
+
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--     callback = function(ev)
+--         local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--         if client then
+--             if client:supports_method("textDocument/completion") then
+--                 vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+--             end
+--         end
+--     end,
+-- })
+
     -- vim.cmd([[au BufWritePre * lua vim.lsp.buf.format({ async = false })]])
+    --     vim.cmd[[set completeopt+=menuone,noselect,popup]]
+    -- vim.lsp.start({
+    --   name = 'ts_ls',
+    --   cmd = { 'typescript-language-server' },
+    --   on_attach = function(client, bufnr)
+    --     vim.lsp.completion.enable(true, client.id, bufnr, {
+    --       autotrigger = true,
+    --       convert = function(item)
+    --         return { abbr = item.label:gsub('%b()', '') }
+    --       end,
+    --     })
+    --   end,
+    -- })
 end
+
 return {
     {
         "williamboman/mason.nvim",

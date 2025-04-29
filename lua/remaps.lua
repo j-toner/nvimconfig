@@ -24,17 +24,18 @@ vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-s>", ":w <CR>") --Save / write file
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>cd", ":cd %:p:h <CR>") -- Change to dir of current file
 
 --Center Cursor
 vim.keymap.set('n', '<leader>cc', function() vim.opt.scrolloff = 999 - vim.o.scrolloff end)
 print(os.clock() * 1000)
 --tabnew
 vim.keymap.set('n', '<C-t>', function() vim.cmd.tabnew() end) -- NEW TAB
-vim.keymap.set('n', '<C-l>', function() vim.cmd.tabnext() end) -- NEXT TAB
+vim.keymap.set('n', '<C-i>', function() vim.cmd.tabnext() end) -- NEXT TAB
 vim.keymap.set('n', '<C-h>', function() vim.cmd.tabprev() end) --PREV TAB
 --terminal
 -- vim.keymap.set('n', '<leader>t', function() vim.cmd.terminal() end) -- Open Terminal 
-vim.keymap.set("n", '<leader>t', vim.cmd.FloatermToggle) -- changed from network rw to Oil
+-- vim.keymap.set("n", '<leader>t', vim.cmd.FloatermToggle) -- changed from network rw to Oil
 -- delete buffer
 vim.keymap.set("n", "<leader>db", ":bdelete <CR>") --delete buffer
 -- vim.keymap.set('n', '<C-w>', function()  vim.cmd.tabclose() end)

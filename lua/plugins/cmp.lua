@@ -60,19 +60,36 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    -- ["<C-n>"] = cmp.mapping.select_next_item(),
+                    -- ["<C-p>"] = cmp.mapping.select_prev_item(),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-u>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete({}),
-                    -- ["<CR>"] = cmp.mapping.confirm({
-                    --     behavior = cmp.ConfirmBehavior.Replace,
-                    --     select = true,
-                    -- }),
+                    --     ["<CR>"] =
+                    --         function (fallback)
+                    --
+                    --         if cmp.get_active_entry() then
+                    --         cmp.mapping.confirm({
+                    --         behavior = cmp.ConfirmBehavior.Replace,
+                    --         select = true,
+                    --         end
+                    -- end
+                    --
+                    --     }),
                     ["<CR>"] = cmp.mapping({
                         i = function(fallback)
                             if cmp.visible() and cmp.get_active_entry() then
-                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+                            else
+                                fallback()
+                            end
+                        end
+                    })
+                    ,
+                    ["<C-CR>"] = cmp.mapping({
+                        i = function(fallback)
+                            if cmp.visible() then
+                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
                             else
                                 fallback()
                             end
@@ -80,7 +97,7 @@ return {
                         s = cmp.mapping.confirm({ select = true }),
                         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
                     }),
-                    ["<C-l>"] = cmp.mapping(function(fallback)
+                    ["<C-n>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
                         elseif luasnip.expand_or_locally_jumpable() then
@@ -89,7 +106,7 @@ return {
                             fallback()
                         end
                     end, { "i", "s" }),
-                    ["<C-h>"] = cmp.mapping(function(fallback)
+                    ["<C-p>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
                         elseif luasnip.locally_jumpable(-1) then
