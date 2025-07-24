@@ -50,19 +50,29 @@ return {
                 builtin.grep_string,
                 { desc = "[S]earch current [W]ord" }
             )
+            -- vim.keymap.set(
+            --     "n",
+            --     "<leader>q",
+            --     builtin.diagnostics,
+            --     { desc = "Diagnostics" }
+            -- )
             vim.keymap.set(
                 "n",
-                "<leader>sd",
-                builtin.diagnostics,
-                { desc = "[S]earch [D]iagnostics" }
+                "<leader>j",
+                builtin.jumplist,
+                { desc = "[J]ump List" }
             )
+            vim.keymap.set("n", "<leader>sp", builtin.spell_suggest, {desc = "[S][P]elling"} )
             vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files" })
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Grep" })
-            vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help" })
-            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]iles" })
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[G]rep" })
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[H]elp" })
+            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[K]eymaps" })
+            vim.keymap.set("n", "<leader>fm", builtin.marks, { desc = "[M]arks" })
+                vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "[R]egisters" })
             vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
+            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[N]ame" })
+            vim.keymap.set("n", "<leader>td", ":TodoTelescope <CR>", { desc = "[T]o[D]o" })
             vim.keymap.set(
                 "n",
                 "<leader><space>",

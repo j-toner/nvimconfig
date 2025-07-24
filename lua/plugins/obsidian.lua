@@ -1,3 +1,6 @@
+vim.keymap.set("n", "<leader>os", ":ObsidianSearch <CR>", {desc = "[O]bsidian [S]earch"})
+vim.keymap.set("n", "<leader>on", ':ObsidianNew <CR>', {desc = "[O]bsidian [N]ew"})    --New Obsidian note
+-- vim.keymap.set("n", "<leader>os", ':ObsidianSearch <CR>') --Search Obsidian note
 return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit

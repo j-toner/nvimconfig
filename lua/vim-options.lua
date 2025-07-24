@@ -46,11 +46,11 @@ vim.opt.smartcase = true
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menuone,noselect"
 -- diagnostic info
--- vim.diagnostic.config({virtual_lines = {current_line = true}})
+-- vim.diagnostic.config({ virtual_lines = new_config })
 
 vim.keymap.set('n', 'gK', function()
     local new_config = not vim.diagnostic.config().virtual_lines
-    vim.diagnostic.config({ virtual_lines = new_config })
+    vim.diagnostic.config({ virtual_lines = { current_line = true } })
 end, { desc = 'Toggle diagnostic virtual_lines' })
 
 
