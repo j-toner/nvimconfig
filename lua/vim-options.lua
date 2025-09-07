@@ -48,10 +48,12 @@ vim.opt.completeopt = "menuone,noselect"
 -- diagnostic info
 -- vim.diagnostic.config({ virtual_lines = new_config })
 
-vim.keymap.set('n', 'gK', function()
-    local new_config = not vim.diagnostic.config().virtual_lines
-    vim.diagnostic.config({ virtual_lines = { current_line = true } })
-end, { desc = 'Toggle diagnostic virtual_lines' })
+vim.diagnostic.config({ virtual_text = false })
+
+-- vim.keymap.set('n', 'gK', function()
+--     local new_config = not vim.diagnostic.config().virtual_text
+--     vim.diagnostic.config({ virtual_text = true })
+-- end, { desc = 'Toggle diagnostic virtual_text' })
 
 
 --vim.apm.nvim_create_autocmd('LspAttach', {

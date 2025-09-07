@@ -1,6 +1,7 @@
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --change windows
 vim.cmd([[nnoremap <Tab> <C-w>w]])
+vim.cmd([[nnoremap <S-Tab> <C-w><C-p>]])
 
 -- vim.keymap.set("i", "<C-e>", "<esc>") -- changed from network rw to Oil
 -- vim.keymap.set("n", "<C-e>", "<esc>") -- changed from network rw to Oil

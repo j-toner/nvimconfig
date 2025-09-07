@@ -63,24 +63,26 @@ end
 
 return {
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         config = function()
             require("mason").setup()
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = { 
+            {"mason-org/mason.nvim", opts = {}},
+            "neovim/nvim-lspconfig",
+        },
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
             mason_lspconfig.setup({
-                ensure_installed = { "lua_ls", "rust_analyzer", "svelte", "ts_ls", "pylsp" },
-                automatic_installation = true,
+                ensure_installed = { "lua_ls", "svelte", "ts_ls" },
             })
         end,
     },
     {
         "neovim/nvim-lspconfig",
-
         dependencies = {
             { "j-hui/fidget.nvim", opts = {} },
             {
@@ -100,39 +102,39 @@ return {
             local lspconfig = require("lspconfig")
             -- local capabilities = require('blink.cmp').get_lsp_capabilities()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local servers = { 'svelte', 'html', 'lua_ls', 'ts_ls', 'gopls', 'tailwindcss', 'pylsp' }
+            local servers = { 'svelte', 'html', 'lua_ls', 'ts_ls', 'gopls', 'tailwindcss', 'pylsp', 'biome' }
             for _, lsp in ipairs(servers) do
                 lspconfig[lsp].setup({
                     capabilities = capabilities,
                     on_attach = on_attach
                 })
             end
-            lspconfig.rust_analyzer.setup({
-                on_attach = function(client, bufnr)
-                    vim.lsp.inlay_hint.enable(bufnr)
-                end,
-                settings = {
-                    ["rust-analyzer"] = {
-                        imports = {
-                            granularity = {
-                                group = "module",
-                            },
-                            prefix = "self",
-                        },
-                        cargo = {
-                            buildScripts = {
-                                enable = true,
-                            },
-                        },
-                        procMacro = {
-                            enable = true,
-                        },
-                        diagnostics = {
-                            enable = false,
-                        },
-                    },
-                },
-            })
+            -- lspconfig.rust_analyzer.setup({
+            --     on_attach = function(client, bufnr)
+            --         vim.lsp.inlay_hint.enable(bufnr)
+            --     end,
+            --     settings = {
+            --         ["rust-analyzer"] = {
+            --             imports = {
+            --                 granularity = {
+            --                     group = "module",
+            --                 },
+            --                 prefix = "self",
+            --             },
+            --             cargo = {
+            --                 buildScripts = {
+            --                     enable = true,
+            --                 },
+            --             },
+            --             procMacro = {
+            --                 enable = true,
+            --             },
+            --             diagnostics = {
+            --                 enable = false,
+            --             },
+            --         },
+            --     },
+            -- })
             if not configs.golangcilsp then
                 configs.golangcilsp = {
                     default_config = {
