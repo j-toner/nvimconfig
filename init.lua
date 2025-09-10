@@ -4,11 +4,11 @@ vim.g.loaded_netrwPlugin = 1
 
 --neovide only
 
-if vim.g.neovide then
-    -- Put anything you want to happen only in Neovide here
-    vim.g.neovide_transparency = 0.8
-    vim.cmd "cd ~/progRock"   -- starts in ~/progRock
-end
+-- if vim.g.neovide then
+--     -- Put anything you want to happen only in Neovide here
+--     vim.g.neovide_transparency = 0.8
+--     vim.cmd "cd ~/progRock"   -- starts in ~/progRock
+-- end
 
 vim.opt.scroll = 5
 
@@ -27,6 +27,7 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
 
 require("vim-options")
 require("remaps")
