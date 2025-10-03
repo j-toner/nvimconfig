@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
             -- client.server_capabilities.completionProvider.triggerCharacters = chars
 
-            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+            vim.lsp.completion.enable(false, client.id, args.buf, { autotrigger = false })
         end
 
         -- Auto-format ("lint") on save.
