@@ -10,13 +10,13 @@ local on_attach = function(_, bufnr)
     end
     -- nmap("<C-g>", require("telescope.actions").delete_buffer(bufnr), "delete")
     nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-    nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-    nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+    nmap("<leader>gd", require("telescope.builtin").lsp_definitions, "telescope [G]oto [D]efinition")
+    nmap("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
     nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
     nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
     nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
     nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    -- nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
     -- Lesser used LSP functionality
     nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -80,11 +80,27 @@ return {
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
             "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
-            local mason_lspconfig = require("mason-lspconfig")
-            mason_lspconfig.setup({
-                ensure_installed = { "lua_ls", "svelte", "ts_ls", "emmet_ls", "html" },
+            local lsps = { "lua_ls", "svelte", "ts_ls", "emmet_ls", "html" }
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- 1. Setup global LSP defaults for all servers
+            -- This ensures nvim-cmp works with every server mason-lspconfig enables
+            vim.lsp.config("*", {
+                capabilities = capabilities,
+            })
+            -- 2. Setup server-specific overrides (like your Lua globals)
+            vim.lsp.config("lua_ls", {
+                settings = {
+                    Lua = {
+                        diagnostics = { globals = { "vim" } },
+                    },
+                },
+            })
+            require("mason-lspconfig").setup({
+                ensure_installed = lsps,
+                automatic_enable = true
             })
         end,
     },

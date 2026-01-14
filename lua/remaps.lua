@@ -13,12 +13,12 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")   --move selected down
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz") --move up
 vim.keymap.set("n", "n", "nzzzv") -- center searched words
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("x", "<leader>p", '"_dP', {desc = "Paste from clipboard"})
-vim.keymap.set("n", "<leader>y", '"+y', {desc = "Yank to clipboard"}) --yank to clipboard
-vim.keymap.set("v", "<leader>y", '"+y', {desc = "Yank to clipboard"})
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste from clipboard" })
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to clipboard" }) --yank to clipboard
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set("v", "<leader>p", '"+p', {desc = "Paste from clipboard"})
-vim.keymap.set("n", "<leader>p", '"+p', {desc = "Paste from clipboard"})
+vim.keymap.set("v", "<leader>p", '"+p', { desc = "Paste from clipboard" })
+vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
 vim.keymap.set("n", "<leader>d", '"_d') --delete without saving deleted text to buffer
 vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("n", "Q", "<nop>")
@@ -28,7 +28,8 @@ vim.keymap.set("n", "<leader>cd", ":cd %:p:h <CR>") -- Change to dir of current 
 
 
 --Center Cursor
-vim.keymap.set('n', '<leader>cc', function() vim.opt.scrolloff = 999 - vim.o.scrolloff end, {desc = "[C]enter [C]ursor"})
+vim.keymap.set('n', '<leader>cc', function() vim.opt.scrolloff = 999 - vim.o.scrolloff end,
+    { desc = "[C]enter [C]ursor" })
 -- print(os.clock() * 1000)
 --tabnew
 vim.keymap.set('n', '<C-t>', function() vim.cmd.tabnew() end)  -- NEW TAB

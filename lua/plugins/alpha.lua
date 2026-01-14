@@ -4,13 +4,10 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
-
     config = function()
         local alpha = require("alpha")
-        
         local dashboard = require("alpha.themes.theta")
         -- local dashboard = require("alpha.themes.dashboard")
-
         dashboard.header.val = {
             [[                                                                       ]],
             [[                                                                       ]],
@@ -42,7 +39,7 @@ return {
             return "Haskell can suck mo' nads"
         end
 
-       alpha.setup(dashboard.config)
+        alpha.setup(dashboard.config)
         -- dashboard.section.footer.val = footer()
         -- alpha.setup(dashboard.opts)
 
@@ -62,7 +59,7 @@ return {
         -- }
 
         -- dashboard.opts.noautocmd = true
--- alpha.setup(dashboard.config)
+        -- alpha.setup(dashboard.config)
         -- require("alpha.term")
         -- dashboard.buttons.val.position = "left"
     end,

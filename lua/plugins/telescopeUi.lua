@@ -1,8 +1,6 @@
 local telescope = require("telescope")
 local themes = require("telescope.themes")
 return {
-
-
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()
         -- This is your opts table

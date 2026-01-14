@@ -41,7 +41,7 @@ return {
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        luasnip.lsp_expand(args.body)
+                        vim.snippet.expand(args.body)
                     end,
                 },
                 formatting = {
@@ -56,14 +56,19 @@ return {
                     expandable_indicator = true,
                 },
                 window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
+                    completion = cmp.config.window.bordered({
+                        -- Linking the window parts to Catppuccin's highlight groups
+                        winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+                    }),
+                    documentation = cmp.config.window.bordered({
+                        winhighlight = "Normal:CmpPmenu,FloatBorder:CmpDocBorder,CursorLine:PmenuSel,Search:None",
+                    }),
                 },
                 mapping = cmp.mapping.preset.insert({
                     -- ["<C-n>"] = cmp.mapping.select_next_item(),
                     -- ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-u>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-Space>"] = cmp.mapping.complete({}),
                     --     ["<CR>"] =
                     --         function (fallback)
@@ -117,8 +122,8 @@ return {
                     end, { "i", "s" }),
                 }),
                 sources = {
-                    { name = "nvim_lsp" },
                     { name = "luasnip" },
+                    { name = "nvim_lsp" },
                     { name = "path" },
                     { name = "buffer" },
                 },
