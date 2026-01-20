@@ -1,143 +1,161 @@
-local cmp_kinds = {
-    Text = '  ',
-    Method = '  ',
-    Function = '  ',
-    Constructor = '  ',
-    Field = '  ',
-    Variable = '  ',
-    Class = '  ',
-    Interface = '  ',
-    Module = '  ',
-    Property = '  ',
-    Unit = '  ',
-    Value = '  ',
-    Enum = '  ',
-    Keyword = '  ',
-    Snippet = '  ',
-    Color = '  ',
-    File = '  ',
-    Reference = '  ',
-    Folder = '  ',
-    EnumMember = '  ',
-    Constant = '  ',
-    Struct = '  ',
-    Event = '  ',
-    Operator = '  ',
-    TypeParameter = '  ',
-}
+-- local cmp_kinds = {
+--     Text = "  ",
+--     Method = "  ",
+--     Function = "  ",
+--     Constructor = "  ",
+--     Field = "  ",
+--     Variable = "  ",
+--     Class = "  ",
+--     Interface = "  ",
+--     Module = "  ",
+--     Property = "  ",
+--     Unit = "  ",
+--     Value = "  ",
+--     Enum = "  ",
+--     Keyword = "  ",
+--     Snippet = "  ",
+--     Color = "  ",
+--     File = "  ",
+--     Reference = "  ",
+--     Folder = "  ",
+--     EnumMember = "  ",
+--     Constant = "  ",
+--     Struct = "  ",
+--     Event = "  ",
+--     Operator = "  ",
+--     TypeParameter = "  ",
+-- }
 return {
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "tailwind-tools",
-            "onsails/lspkind-nvim",
-            "saadparwaiz1/cmp_luasnip",
-        },
-        config = function()
-            local cmp = require("cmp")
-            local lspkind = require("lspkind")
-            local luasnip = require("luasnip")
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        vim.snippet.expand(args.body)
-                    end,
-                },
-                formatting = {
-                    format = lspkind.cmp_format(),
-                    fields = { "abbr", "kind", "menu" },
-                    menu = {
-                        nvim_lsp = "[LSP]",
-                        luasnip = "[Snippet]",
-                        buffer = "[Buffer]",
-                        path = "[Path]",
-                    },
-                    expandable_indicator = true,
-                },
-                window = {
-                    completion = cmp.config.window.bordered({
-                        -- Linking the window parts to Catppuccin's highlight groups
-                        winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
-                    }),
-                    documentation = cmp.config.window.bordered({
-                        winhighlight = "Normal:CmpPmenu,FloatBorder:CmpDocBorder,CursorLine:PmenuSel,Search:None",
-                    }),
-                },
-                mapping = cmp.mapping.preset.insert({
-                    -- ["<C-n>"] = cmp.mapping.select_next_item(),
-                    -- ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-Space>"] = cmp.mapping.complete({}),
-                    --     ["<CR>"] =
-                    --         function (fallback)
-                    --
-                    --         if cmp.get_active_entry() then
-                    --         cmp.mapping.confirm({
-                    --         behavior = cmp.ConfirmBehavior.Replace,
-                    --         select = true,
-                    --         end
-                    -- end
-                    --
-                    --     }),
-                    ["<CR>"] = cmp.mapping({
-                        i = function(fallback)
-                            if cmp.visible() and cmp.get_active_entry() then
-                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-                            else
-                                fallback()
-                            end
-                        end
-                    })
-                    ,
-                    ["<C-CR>"] = cmp.mapping({
-                        i = function(fallback)
-                            if cmp.visible() then
-                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-                            else
-                                fallback()
-                            end
-                        end,
-                        s = cmp.mapping.confirm({ select = true }),
-                        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-                    }),
-                    ["<C-n>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_locally_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<C-p>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.locally_jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                }),
-                sources = {
-                    { name = "luasnip" },
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                    { name = "buffer" },
-                },
-                opts = function()
-                    return {
-                        -- ...
-                        formatting = {
-                            format = require("lspkind").cmp_format({
-                                before = require("tailwind-tools.cmp").lspkind_format
-                            }),
-                        },
-                    }
-                end,
-            })
-        end
-    }
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     dependencies = {
+    --         "hrsh7th/cmp-nvim-lsp",
+    --         "tailwind-tools",
+    --         "onsails/lspkind-nvim",
+    --         "saadparwaiz1/cmp_luasnip",
+    --     },
+    --     config = function()
+    --         local cmp = require("cmp")
+    --         local lspkind = require("lspkind")
+    --         local luasnip = require("luasnip")
+    --         cmp.setup({
+    --             snippet = {
+    --                 expand = function(args)
+    --                     vim.snippet.expand(args.body)
+    --                 end,
+    --             },
+    --             formatting = {
+    --                 format = lspkind.cmp_format({
+    --                     mode = "symbol_text",
+    --                     maxwidth = 50,
+    --                     ellipsis_text = "...",
+    --                     before = require("tailwind-tools.cmp").lspkind_format,
+    --                 }),
+    --                 fields = { "abbr", "kind", "menu" },
+    --                 menu = {
+    --                     nvim_lsp = "[LSP]",
+    --                     luasnip = "[Snippet]",
+    --                     buffer = "[Buffer]",
+    --                     path = "[Path]",
+    --                 },
+    --                 expandable_indicator = true,
+    --             },
+    --             window = {
+    --                 completion = {
+    --                     border = "rounded",
+    --                     winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+    --                 },
+    --                 documentation = {
+    --                     border = "rounded",
+    --                     winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder,CursorLine:PmenuSel,Search:None",
+    --                 },
+    --             },
+    --             mapping = cmp.mapping.preset.insert({
+    --                 -- ["<C-n>"] = cmp.mapping.select_next_item(),
+    --                 -- ["<C-p>"] = cmp.mapping.select_prev_item(),
+    --                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    --                 ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    --                 ["<C-Space>"] = cmp.mapping.complete({}),
+    --                 --     ["<CR>"] =
+    --                 --         function (fallback)
+    --                 --
+    --                 --         if cmp.get_active_entry() then
+    --                 --         cmp.mapping.confirm({
+    --                 --         behavior = cmp.ConfirmBehavior.Replace,
+    --                 --         select = true,
+    --                 --         end
+    --                 -- end
+    --                 --
+    --                 --     }),
+    --                 ["<CR>"] = cmp.mapping({
+    --                     i = function(fallback)
+    --                         if cmp.visible() and cmp.get_active_entry() then
+    --                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+    --                         else
+    --                             fallback()
+    --                         end
+    --                     end,
+    --                 }),
+    --                 ["<C-CR>"] = cmp.mapping({
+    --                     i = function(fallback)
+    --                         if cmp.visible() then
+    --                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+    --                         else
+    --                             fallback()
+    --                         end
+    --                     end,
+    --                     s = cmp.mapping.confirm({ select = true }),
+    --                     c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    --                 }),
+    --                 ["<C-n>"] = cmp.mapping(function(fallback)
+    --                     if cmp.visible() then
+    --                         cmp.select_next_item()
+    --                     elseif luasnip.expand_or_locally_jumpable() then
+    --                         luasnip.expand_or_jump()
+    --                     else
+    --                         fallback()
+    --                     end
+    --                 end, { "i", "s" }),
+    --                 ["<C-p>"] = cmp.mapping(function(fallback)
+    --                     if cmp.visible() then
+    --                         cmp.select_prev_item()
+    --                     elseif luasnip.locally_jumpable(-1) then
+    --                         luasnip.jump(-1)
+    --                     else
+    --                         fallback()
+    --                     end
+    --                 end, { "i", "s" }),
+    --             }),
+    --             sources = {
+    --                 { name = "luasnip" },
+    --                 { name = "nvim_lsp" },
+    --                 { name = "path" },
+    --                 { name = "buffer" },
+    --             },
+    --             opts = function()
+    --                 return {
+    --                     -- ...
+    --                     formatting = {
+    --                         format = require("lspkind").cmp_format({
+    --                             before = require("tailwind-tools.cmp").lspkind_format,
+    --                         }),
+    --                     },
+    --                 }
+    --             end,
+    --         })
+    --         -- MANUAL HIGHLIGHT OVERRIDE (The "Priority Win")
+    --         -- We place this AFTER cmp.setup to ensure it sticks
+    --         local colors = {
+    --             bg = "#11111b", -- Mocha Crust
+    --             border = "#89b4fa", -- Mocha Blue
+    --             sel = "#313244", -- Mocha Surface0
+    --         }
+    --
+    --         vim.api.nvim_set_hl(0, "CmpPmenu", { bg = colors.bg })
+    --         vim.api.nvim_set_hl(0, "CmpBorder", { fg = colors.border, bg = colors.bg })
+    --         vim.api.nvim_set_hl(0, "CmpDocNormal", { bg = colors.bg })
+    --         vim.api.nvim_set_hl(0, "CmpDocBorder", { fg = colors.border, bg = colors.bg })
+    --         vim.api.nvim_set_hl(0, "PmenuSel", { bg = colors.sel, fg = colors.border, bold = true })
+    --     end,
+    -- },
 }

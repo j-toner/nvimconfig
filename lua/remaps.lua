@@ -26,15 +26,21 @@ vim.keymap.set("n", "<C-s>", ":w <CR>")             --Save / write file
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>cd", ":cd %:p:h <CR>") -- Change to dir of current file
 
-
 --Center Cursor
-vim.keymap.set('n', '<leader>cc', function() vim.opt.scrolloff = 999 - vim.o.scrolloff end,
-    { desc = "[C]enter [C]ursor" })
+vim.keymap.set("n", "<leader>cc", function()
+    vim.opt.scrolloff = 999 - vim.o.scrolloff
+end, { desc = "[C]enter [C]ursor" })
 -- print(os.clock() * 1000)
 --tabnew
-vim.keymap.set('n', '<C-t>', function() vim.cmd.tabnew() end)  -- NEW TAB
-vim.keymap.set('n', '<C-i>', function() vim.cmd.tabnext() end) -- NEXT TAB
-vim.keymap.set('n', '<C-h>', function() vim.cmd.tabprev() end) --PREV TAB
+vim.keymap.set("n", "<C-t>", function()
+    vim.cmd.tabnew()
+end) -- NEW TAB
+vim.keymap.set("n", "<C-i>", function()
+    vim.cmd.tabnext()
+end) -- NEXT TAB
+vim.keymap.set("n", "<C-h>", function()
+    vim.cmd.tabprev()
+end) --PREV TAB
 --terminal
 -- vim.keymap.set('n', '<leader>t', function() vim.cmd.terminal() end) -- Open Terminal
 -- vim.keymap.set("n", '<leader>t', vim.cmd.FloatermToggle) -- changed from network rw to Oil
@@ -42,7 +48,6 @@ vim.keymap.set('n', '<C-h>', function() vim.cmd.tabprev() end) --PREV TAB
 vim.keymap.set("n", "<leader>db", ":bdelete <CR>") --delete buffer
 -- vim.keymap.set('n', '<C-w>', function()  vim.cmd.tabclose() end)
 -- vim.keymap.set("n", "<leader>no", string.format(':vsplit <bar> :new /home/jt/ObsidianVault/[os.clock() * 100000] <CR>')) --Save / write file
-
 
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

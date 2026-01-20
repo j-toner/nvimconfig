@@ -1,0 +1,24 @@
+{
+    "Formatted console log": {
+        "prefix": "forc",
+        "body": [
+            "console.log(`",
+            "======================",
+            "${1:title}",
+            "${2:description}.",
+            "======================`)"
+        ],
+        "description": "Formatted console log"
+    },
+    "Formatted console error log": {
+        "prefix": "forcerr",
+        "body": [
+            "console.error(`",
+            "======================",
+            "${1:title}",
+            "${2:description}.",
+            "======================`)"
+        ],
+        "description": "Formatted console error log"
+    }
+}
