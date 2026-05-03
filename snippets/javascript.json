@@ -1,6 +1,6 @@
 {
     "Formatted console log": {
-        "prefix": "forc",
+        "prefix": "conf",
         "body": [
             "console.log(`",
             "======================",

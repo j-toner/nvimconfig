@@ -4,7 +4,6 @@ return {
 		-- "rafamadriz/friendly-snippets",
 		"L3MON4D3/LuaSnip",
 		version = "2.*",
-		"luckasRanarison/tailwind-tools.nvim",
 		-- "onsails/lspkind.nvim",
 	},
 	version = "v1.*",
