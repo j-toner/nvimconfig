@@ -3,9 +3,7 @@ return {
 	dependencies = {
 		-- "rafamadriz/friendly-snippets",
 		"L3MON4D3/LuaSnip",
-		version = "2.*",
-		"luckasRanarison/tailwind-tools.nvim",
-		-- "onsails/lspkind.nvim",
+		version = "2.*"
 	},
 	version = "v1.*",
 	opts = {
@@ -42,17 +40,17 @@ return {
 			accept = { auto_brackets = { enabled = true } },
 			trigger = { show_on_keyword = true },
 			ghost_text = { enabled = false },
-            list = {
-                selection = {
-                    preselect = false,
-                    auto_insert = false,
-                },
-            },
+			list = {
+				selection = {
+					preselect = false,
+					auto_insert = false,
+				},
+			},
 			menu = {
 				border = "rounded",
 				draw = {
 					columns = {
-						{ "label", "label_description", gap = 1 },
+						{ "label",     "label_description", gap = 1 },
 						{ "kind_icon", "kind" },
 					},
 				},

@@ -30,6 +30,13 @@ vim.opt.updatetime = 50
 vim.opt.timeoutlen = 300
 vim.opt.colorcolumn = "150"
 
+-- Auto load open files
+
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+    command = "checktime"
+})
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
