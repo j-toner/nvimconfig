@@ -4,7 +4,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
-		local config = require("nvim-treesitter.configs")
+		local config = require("nvim-treesitter")
 		config.setup({
 			-- Add languages to be installed here that you want installed for treesitter
 			ensure_installed = {
